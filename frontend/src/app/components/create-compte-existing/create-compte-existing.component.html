@@ -1,0 +1,39 @@
+<div class="container">
+    <h1>Créer un Compte pour un Client Existant</h1>
+    <form (ngSubmit)="onSubmit()" #compteForm="ngForm">
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+        <div class="mb-3">
+            <label for="cin" class="form-label">CIN</label>
+            <input type="text" id="cin" name="cin" class="form-control" [(ngModel)]="compte.cin" (input)="onCinInput()"
+                required #cinInput="ngModel" />
+            <ul *ngIf="suggestions.length > 0" class="list-group">
+                <li *ngFor="let suggestion of suggestions" class="list-group-item"
+                    (click)="selectSuggestion(suggestion)">
+                    {{ suggestion.label }}
+                </li>
+            </ul>
+        </div>
+
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" name="nom" class="form-control" [(ngModel)]="compte.nom" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input type="text" id="prenom" name="prenom" class="form-control" [(ngModel)]="compte.prenom" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label for="solde" class="form-label">Solde</label>
+            <input type="number" step="0.01" id="solde" name="solde" class="form-control" [(ngModel)]="compte.solde"
+                required #soldeInput="ngModel" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="compteForm.invalid">
+            Créer
+        </button>
+        <a routerLink="/comptes" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>

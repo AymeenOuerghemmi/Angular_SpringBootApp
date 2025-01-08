@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Liste des Comptes</h1>
+
+    <!-- Buttons for adding accounts -->
+    <div class="mb-4 d-flex justify-content-between flex-wrap">
+        <a routerLink="/comptes/create/existing" class="btn btn-outline-success px-4 py-2 rounded-pill">Ajouter un
+            Compte (Client Existant)</a>
+        <a routerLink="/comptes/create/new" class="btn btn-outline-primary px-4 py-2 rounded-pill">Ajouter un Compte
+            (Nouveau Client)</a>
+    </div>
+
+    <!-- Table for listing accounts -->
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>RIB</th>
+                    <th>Solde</th>
+                    <th>CIN Client</th>
+                    <th>Nom Client</th>
+                    <th>Prénom Client</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- No accounts available -->
+                <tr *ngIf="comptes.length === 0">
+                    <td colspan="6" class="text-center text-muted">Aucun compte disponible.</td>
+                </tr>
+                <!-- List of accounts -->
+                <tr *ngFor="let compte of comptes">
+                    <td>{{ compte.rib }}</td>
+                    <td>{{ compte.solde | currency }}</td>
+                    <td>{{ compte.client.cin }}</td>
+                    <td>{{ compte.client.nom }}</td>
+                    <td>{{ compte.client.prenom }}</td>
+                    <td class="text-center">
+                        <a [routerLink]="['/comptes/edit', compte.rib]"
+                            class="btn btn-warning btn-sm rounded-pill mx-1">Modifier</a>
+                        <button (click)="deleteCompte(compte.rib)"
+                            class="btn btn-danger btn-sm rounded-pill mx-1">Supprimer</button>
+                        <button (click)="onDeleteCompte(compte.rib)"
+                            class="btn btn-danger btn-sm rounded-pill mx-1">Supprimer-Ajax</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Back to home button -->
+    <div class="mb-3 text-center">
+        <a routerLink="/" class="btn btn-outline-secondary px-4 py-2 rounded-pill">Retour à l'Accueil</a>
+    </div>
+</div>

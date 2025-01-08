@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Liste des Clients</h1>
+    <div class="d-flex justify-content-end mb-4">
+        <a routerLink="/clients/create" class="btn btn-outline-success px-4 py-2 rounded-pill">Ajouter Client</a>
+    </div>
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>CIN</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients" [id]="'tr' + client.cin" class="align-middle">
+                    <td>{{ client.cin }}</td>
+                    <td>{{ client.nom }}</td>
+                    <td>{{ client.prenom }}</td>
+                    <td class="text-center">
+                        <a [routerLink]="['/clients/edit', client.cin]"
+                            class="btn btn-warning btn-sm rounded-pill me-2">Modifier</a>
+                        <button (click)="deleteClient(client.cin)"
+                            class="btn btn-danger btn-sm rounded-pill">Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <a routerLink="/" class="btn btn-outline-secondary px-4 py-2 rounded-pill">Retour à l'Accueil</a>
+    </div>
+</div>
