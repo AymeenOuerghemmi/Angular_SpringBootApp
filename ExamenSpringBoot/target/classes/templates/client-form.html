@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${client.cin != null} ? 'Modifier Client' : 'Ajouter Client'"></h1>
+    <form th:action="@{/clients}" th:object="${client}" method="post">
+        <div class="mb-3">
+            <label for="cin" class="form-label">CIN</label>
+            <input type="number" id="cin" name="cin" class="form-control" th:field="*{cin}" required>
+        </div>
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" id="nom" name="nom" class="form-control" th:field="*{nom}" required>
+        </div>
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input type="text" id="prenom" name="prenom" class="form-control" th:field="*{prenom}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="/clients" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+</body>
+</html>

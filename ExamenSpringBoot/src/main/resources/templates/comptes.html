@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Comptes Management</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<h1>Liste des Comptes</h1>
+		<div class="mb-3">
+			<a href="/comptes/create/existing" class="btn btn-success">Ajouter un Compte (Client Existant)</a>
+			<a href="/comptes/create/new" class="btn btn-primary">Ajouter un Compte (Nouveau Client)</a>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>RIB</th>
+					<th>Solde</th>
+					<th>CIN Client</th>
+					<th>Nom Client</th>
+					<th>Prénom Client</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="compte : ${comptes}">
+					<td th:text="${compte.rib}"></td>
+					<td th:text="${compte.solde}"></td>
+					<td th:text="${compte.client.cin}"></td>
+					<td th:text="${compte.client.nom}"></td>
+					<td th:text="${compte.client.prenom}"></td>
+					<td>
+						<a th:href="@{/comptes/edit/{rib}(rib=${compte.rib})}" class="btn btn-warning">Modifier</a>
+						<form th:action="@{/comptes/delete/{rib}(rib=${compte.rib})}" method="post"
+							style="display:inline;">
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</form>
+						<td><a th:href="|javascript:deleteCompte(${compte.rib})|" class="btn btn-success">Supprimer-ajax</a></td>
+
+			</tbody>
+
+		</table>
+		<div class="mb-3">
+			<a href="/" class="btn btn-secondary">Retour à l'Accueil</a>
+		</div>
+	</div>
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<script src="/js/sweetalert.min.js"></script>
+	<script src="/js/comptes.js"></script>
+	
+</body>
+
+</html>

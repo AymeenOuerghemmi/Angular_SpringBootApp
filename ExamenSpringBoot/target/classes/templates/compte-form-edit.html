@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Modifier un Compte</h1>
+    <form th:action="@{/comptes/edit}" th:object="${compte}" method="post">
+        <div class="mb-3">
+            <label for="rib" class="form-label">RIB</label>
+            <input type="text" id="rib" name="rib" class="form-control" th:field="*{rib}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="solde" class="form-label">Solde</label>
+            <input type="number" step="0.01" id="solde" name="solde" class="form-control" th:field="*{solde}" required>
+        </div>
+        <div class="mb-3">
+            <label for="clientCin" class="form-label">CIN Client</label>
+            <input type="text" id="clientCin" name="client.cin" class="form-control" th:field="*{client.cin}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="clientNom" class="form-label">Nom Client</label>
+            <input type="text" id="clientNom" name="client.nom" class="form-control" th:field="*{client.nom}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="clientPrenom" class="form-label">Prénom Client</label>
+            <input type="text" id="clientPrenom" name="client.prenom" class="form-control" th:field="*{client.prenom}" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <a href="/comptes" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+</body>
+</html>
